@@ -1,0 +1,33 @@
+
+
+h1  Account
+
+table.table
+  tr
+    th Id
+    th Username
+    th Email
+    th Created At
+    th Updated At
+  tr
+    td = @user.id
+    td = @user.username
+    td = @user.email
+    td = date_formatter(@user.created_at)
+    td = date_formatter(@user.updated_at)
+
+h2 User's phrases:
+
+table.table
+  tr
+    th Id
+    th Phrase
+    th Translation
+    th Category
+    th Actions
+    th Votes
+
+  - @phrases.each do |phrase|
+    = render :partial => phrase, locals: { :author => true }
+
+= will_paginate @phrases, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

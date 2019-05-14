@@ -1,0 +1,21 @@
+
+
+h1  All users
+
+table.table
+  tr
+    th Id
+    th Username
+    th Email
+    th Created At
+    th Updated At
+    th Carma
+
+  - @users.each do |user|
+    tr
+      td = user.id
+      td = user.username
+      td = user.email
+      td = date_formatter(user.created_at)
+      td = date_formatter(user.updated_at)
+      td = user.carma

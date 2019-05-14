@@ -1,0 +1,96 @@
+[31mF[0m[31mF[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+
+Failures:
+
+  1) PhrasesController GET index renders the index page
+     [31mFailure/Error: get :index[0m
+     [31m[0m
+     [31mActionView::Template::Error:[0m
+     [31m  wrong number of arguments (given 2, expected 1)[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/rails-controller-testing-1.0.4/lib/rails/controller/testing/template_assertions.rb:61:in `process'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/lib/devise/test/controller_helpers.rb:35:in `block in process'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/lib/devise/test/controller_helpers.rb:102:in `catch'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/lib/devise/test/controller_helpers.rb:102:in `_catch_warden'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/lib/devise/test/controller_helpers.rb:35:in `process'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/rails-controller-testing-1.0.4/lib/rails/controller/testing/integration.rb:13:in `block (2 levels) in <module:Integration>'[0m
+     [36m# ./spec/controllers/phrases_controller_spec.rb:9:in `block (3 levels) in <top (required)>'[0m
+     [36m# ------------------[0m
+     [36m# --- Caused by: ---[0m
+     [36m# ArgumentError:[0m
+     [36m#   wrong number of arguments (given 2, expected 1)[0m
+     [36m#   /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/rails-controller-testing-1.0.4/lib/rails/controller/testing/template_assertions.rb:61:in `process'[0m
+
+  2) StaticPagesController GET hello renders the hello page
+     [31mFailure/Error: get :hello[0m
+     [31m[0m
+     [31mActionView::Template::Error:[0m
+     [31m  wrong number of arguments (given 2, expected 1)[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/rails-controller-testing-1.0.4/lib/rails/controller/testing/template_assertions.rb:61:in `process'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/lib/devise/test/controller_helpers.rb:35:in `block in process'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/lib/devise/test/controller_helpers.rb:102:in `catch'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/lib/devise/test/controller_helpers.rb:102:in `_catch_warden'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/lib/devise/test/controller_helpers.rb:35:in `process'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/rails-controller-testing-1.0.4/lib/rails/controller/testing/integration.rb:13:in `block (2 levels) in <module:Integration>'[0m
+     [36m# ./spec/controllers/static_pages_controller_spec.rb:9:in `block (3 levels) in <top (required)>'[0m
+     [36m# ------------------[0m
+     [36m# --- Caused by: ---[0m
+     [36m# ArgumentError:[0m
+     [36m#   wrong number of arguments (given 2, expected 1)[0m
+     [36m#   /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/rails-controller-testing-1.0.4/lib/rails/controller/testing/template_assertions.rb:61:in `process'[0m
+
+  3) Example validations should validate that :example is case-sensitively unique within the scope of :phrase
+     [31mFailure/Error:[0m
+     [31m  it { is_expected.to validate_uniqueness_of(:example)[0m
+     [31m      .scoped_to(:phrase) }[0m
+     [31m[0m
+     [31mNoMethodError:[0m
+     [31m  undefined method `type' for nil:NilClass[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb:823:in `next_scalar_value_for'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb:816:in `next_value_for'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb:788:in `setting_next_value_for'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb:764:in `block in matches_uniqueness_with_scopes?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb:763:in `each'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb:763:in `all?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb:763:in `matches_uniqueness_with_scopes?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_record/validate_uniqueness_of_matcher.rb:332:in `matches?'[0m
+     [36m# ./spec/models/example_spec.rb:9:in `block (2 levels) in <top (required)>'[0m
+
+  4) Phrase validations should validate that :category is either ‹"Actions"›, ‹"Time"›, ‹"Productivity"›, ‹"Apologies"›, or ‹"Common"›, producing a custom validation error on failure
+     [31mFailure/Error:[0m
+     [31m  it { is_expected.to validate_inclusion_of(:category)[0m
+     [31m    .in_array(%w(Actions Time Productivity Apologies Common))[0m
+     [31m    .with_message('%{value} is not a valid categoty') }[0m
+     [31m[0m
+     [31mArgumentError:[0m
+     [31m  '123456789' is not a valid category[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher/attribute_setter.rb:83:in `public_send'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher/attribute_setter.rb:83:in `set'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher/attribute_setter.rb:67:in `set!'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher/attribute_setters_and_validators.rb:38:in `matches?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher/attribute_setters_and_validators.rb:24:in `each'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher/attribute_setters_and_validators.rb:24:in `detect'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher/attribute_setters_and_validators.rb:24:in `first_passing'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher.rb:534:in `public_send'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher.rb:534:in `run'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/allow_value_matcher.rb:401:in `does_not_match?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/disallow_value_matcher.rb:32:in `matches?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/validation_matcher.rb:162:in `run_allow_or_disallow_matcher'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/validation_matcher.rb:98:in `disallows_value_of'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/validate_inclusion_of_matcher.rb:522:in `block in disallows_all_values_outside_of_array?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/validate_inclusion_of_matcher.rb:521:in `each'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/validate_inclusion_of_matcher.rb:521:in `all?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/validate_inclusion_of_matcher.rb:521:in `disallows_all_values_outside_of_array?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/validate_inclusion_of_matcher.rb:424:in `matches_for_array?'[0m
+     [36m# /Users/leviossa/.rvm/gems/ruby-2.5.1/gems/shoulda-matchers-4.0.1/lib/shoulda/matchers/active_model/validate_inclusion_of_matcher.rb:382:in `matches?'[0m
+     [36m# ./spec/models/phrase_spec.rb:8:in `block (2 levels) in <top (required)>'[0m
+
+Finished in 0.90362 seconds (files took 7.95 seconds to load)
+[31m19 examples, 4 failures[0m
+
+Failed examples:
+
+[31mrspec ./spec/controllers/phrases_controller_spec.rb:5[0m [36m# PhrasesController GET index renders the index page[0m
+[31mrspec ./spec/controllers/static_pages_controller_spec.rb:5[0m [36m# StaticPagesController GET hello renders the hello page[0m
+[31mrspec ./spec/models/example_spec.rb:9[0m [36m# Example validations should validate that :example is case-sensitively unique within the scope of :phrase[0m
+[31mrspec ./spec/models/phrase_spec.rb:8[0m [36m# Phrase validations should validate that :category is either ‹"Actions"›, ‹"Time"›, ‹"Productivity"›, ‹"Apologies"›, or ‹"Common"›, producing a custom validation error on failure[0m
+

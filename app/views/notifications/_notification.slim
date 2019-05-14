@@ -1,0 +1,19 @@
+
+.alert.alert-info
+  - unless notification.read
+    span.badge.badge-warning Unread
+  - else
+    span.badge.badge-secondary Read
+  br
+  = notification.owner.username
+  | &nbsp;
+  = notification.key
+  | &nbsp;
+  = notification.trackable_type
+  | &nbsp;
+  - if notification.trackable_type == 'Example'
+    = link_to "#{notification.trackable.example}", phrase_path(notification.trackable.phrase)
+  - else
+    = link_to "#{notification.trackable.phrase}", phrase_path(notification.trackable)
+  br
+  = date_formatter(notification.created_at)

@@ -1,0 +1,55 @@
+
+h3 Phrase id #{@phrase.id}
+
+table.table
+  tr
+    th Phrase
+    th Translation
+    th Author
+    th Category
+    th Created
+    th Updated
+
+  tr
+    td = @phrase.phrase
+    td = @phrase.translation
+    td = link_to @phrase.user.username, user_path(@phrase.user)
+    td = @phrase.category
+    td = date_formatter(@phrase.created_at)
+    td = date_formatter(@phrase.updated_at)
+
+
+= form_for @example, :url => phrase_examples_path(@phrase) do |f|
+  .form-group
+    = f.label :example
+    br
+    = f.text_field :example, class: "form-control"
+    = f.hidden_field :user_id, class: "form-control"
+  = f.submit "Create Example", class: "btn btn-primary"
+
+h4 Examples
+table.table
+  tr
+    th Example
+    th Author
+    th Created
+    th Actions
+    th Votes
+
+  - @examples.each do |example|
+    tr
+      td = example.example
+      td = example.user.username
+      td = date_formatter(example.created_at)
+      td
+        - if show_example_delete_link? example
+           = link_to 'Delete', phrase_example_path(example.phrase, example), class: 'delete_phrase', method: :delete
+      td
+        = link_to 'UP', phrase_example_vote_path(example.phrase, example, vote: 'up'), method: :post
+        | &nbsp;
+        = example.weighted_score
+        | &nbsp;
+        = link_to 'DOWN', phrase_example_vote_path(example.phrase, example, vote: 'down'), method: :post
+
+
+= will_paginate @examples, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

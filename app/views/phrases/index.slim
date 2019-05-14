@@ -1,0 +1,17 @@
+
+
+h1  Listing phrases
+
+table.table
+  tr
+    th Id
+    th Phrase
+    th Translation
+    th Category
+    th Author
+    th Votes
+
+  - @phrases.each do |phrase|
+    = render :partial => phrase, locals: { :author => false }
+
+= will_paginate @phrases, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

@@ -1,0 +1,21 @@
+
+tr
+  td = phrase.id
+  td = link_to phrase.phrase, phrase_path(phrase)
+  td = phrase.translation
+  td = phrase.category
+  - unless author
+    td
+      = link_to phrase.user.username, user_path(phrase.user)
+  - else
+    td
+      - if phrase.author? current_user
+        = link_to 'Edit', edit_phrase_path(phrase.id)
+        | &nbsp;
+        = link_to 'Delete', phrase, method: :delete
+  td
+    = link_to 'UP', vote_phrase_path(phrase, vote: 'up'), method: :post
+    | &nbsp;
+    = phrase.weighted_score
+    | &nbsp;
+    = link_to 'DOWN', vote_phrase_path(phrase, vote: 'down'), method: :post
