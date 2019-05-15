@@ -64,6 +64,7 @@ RSpec.configure do |config|
     config.example_status_persistence_file_path = "spec/failures.txt"
     config.include Devise::Test::ControllerHelpers, type: :controller
     config.include Devise::Test::ControllerHelpers, type: :view
+    config.render_views
   end
 
 

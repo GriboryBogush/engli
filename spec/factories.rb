@@ -17,11 +17,23 @@ FactoryBot.define do
     translation { "Some translation" }
     category { 1 }
     slug { :phrase }
+
+    trait :invalid do
+      phrase { nil }
+    end
+
+    trait :update do
+      phrase { Faker::Movies::Ghostbusters.quote }
+    end
   end
 
   factory :example do
     user
     phrase
     example { Faker::Movies::BackToTheFuture.quote }
+
+    trait :invalid do
+      example { nil }
+    end
   end
 end
