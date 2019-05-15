@@ -17,12 +17,15 @@ RSpec.describe Example do
     let(:not_author) { build(:user) }
     let(:example) { build(:example, user: author) }
 
-    it "returns true if author is the same" do
-      expect(example.author?(author)).to be true
+    context 'author is the same' do
+      it "returns true" do
+        expect(example.author?(author)).to be true
+      end
     end
-
-    it "returns true if author is different" do
-      expect(example.author?(not_author)).to be false
+    context 'author is different' do
+      it 'returns true ' do
+        expect(example.author?(not_author)).to be false
+      end
     end
   end
 

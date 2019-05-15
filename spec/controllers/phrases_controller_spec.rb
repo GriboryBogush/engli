@@ -42,9 +42,11 @@ RSpec.describe PhrasesController do
     end
 
     context 'when the phrase is valid ' do
-      it 'redirects to :index page' do
+      it 'creates a phrase and redirects to :index page' do
 
         post :create, params: { phrase:  attributes_for(:phrase)  }
+
+        expect(flash[:notice]).not_to be_empty
         expect(response).to  redirect_to root_path
       end
     end
@@ -53,6 +55,8 @@ RSpec.describe PhrasesController do
       it 're-renders the :new page' do
 
         post :create, params: { phrase: attributes_for(:phrase, :invalid) }
+
+        expect(flash[:danger]).not_to be_empty
         expect(response).to  render_template :new
       end
     end
@@ -68,6 +72,8 @@ RSpec.describe PhrasesController do
         sign_in user
 
         put :update, params: { id: phrase.id, phrase: attributes_for(:phrase, :update) }
+
+        expect(flash[:notice]).not_to be_empty
         expect(response).to redirect_to user_path(user)
       end
     end
@@ -78,6 +84,8 @@ RSpec.describe PhrasesController do
         sign_in not_author
 
         put :update, params: { id: phrase.id, phrase: attributes_for(:phrase, :update) }
+
+        expect(flash[:danger]).not_to be_empty
         expect(response).to redirect_to(root_path)
       end
     end
@@ -87,6 +95,8 @@ RSpec.describe PhrasesController do
         sign_in user
 
         put :update, params: { id: phrase.id, phrase: attributes_for(:phrase, :invalid) }
+
+        expect(flash[:danger]).not_to be_empty
         expect(response).to render_template :edit
       end
     end
@@ -102,16 +112,20 @@ RSpec.describe PhrasesController do
         sign_in user
 
         delete :destroy, params: { id: phrase.id }
+
+        expect(flash[:notice]).not_to be_empty
         expect(response).to redirect_to user_path(user)
       end
     end
 
     context 'when the user is not an author' do
-      it 'redirects to root_path' do
+      it 'doesn\'t delete the phrase and redirects to root_path' do
         not_author = create(:user)
         sign_in not_author
 
         delete :destroy, params: { id: phrase.id }
+
+        expect(flash[:danger]).not_to be_empty
         expect(response).to redirect_to(root_path)
       end
     end
@@ -119,7 +133,7 @@ RSpec.describe PhrasesController do
   end
 
 
-
+  # testing voting functionality
   describe '#shared_vote' do
     let (:author) { FactoryBot.create(:user) }
     let (:phrase) { FactoryBot.create(:phrase, user: author) }

@@ -1,17 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe Phrase, "validations" do
-  subject { create(:phrase) }
-  it { is_expected.to validate_presence_of(:phrase) }
-  it { is_expected.to validate_uniqueness_of(:phrase) }
-  it { is_expected.to validate_presence_of(:translation) }
-  # it { is_expected.to validate_inclusion_of(:category)
-  #   .in_array(%w(Actions Time Productivity Apologies Common))
-  #   .with_message('%{value} is not a valid categoty') }
-end
+RSpec.describe Phrase do 
+  describe "validations" do
+    subject { create(:phrase) }
+    it { is_expected.to validate_presence_of(:phrase) }
+    it { is_expected.to validate_uniqueness_of(:phrase) }
+    it { is_expected.to validate_presence_of(:translation) }
+    # it { is_expected.to validate_inclusion_of(:category)
+    #   .in_array(%w(Actions Time Productivity Apologies Common))
+    #   .with_message('%{value} is not a valid categoty') }
+  end
 
-
-RSpec.describe Phrase do
   describe "#author?" do
     author = FactoryBot.build(:user)
     not_author = FactoryBot.build(:user)

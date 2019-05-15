@@ -5,24 +5,23 @@ RSpec.describe ExamplesController do
   describe 'POST show/:id/create' do
     let(:user) { create(:user) }
     let(:phrase) { create(:phrase, user: user) }
+    before { sign_in user }
 
     context 'when the example is valid' do
       it 'creates an example and redirects to phrase :show path' do
-        sign_in user
-
         params = { params: { phrase_id: phrase.id, example: attributes_for(:example) } }
         # weird stuff, but it works
         params[:params][:example][:user_id] = user.id
 
         post :create, params
-        expect(flash[:notice]).to eq 'Example has been created!'
+
+        expect(flash[:notice]).not_to be_empty
         expect(response).to redirect_to phrase_path(phrase)
       end
     end
 
     context 'when the example is invalid' do
       it 'doesn\t create and example and redirects to phrase :show path' do
-        sign_in user
 
         post :create, params: { phrase_id: phrase.id, example: attributes_for(:example, :invalid) }
 
@@ -43,7 +42,7 @@ RSpec.describe ExamplesController do
 
         delete :destroy, params: { phrase_id: phrase.id, id: example.id }
 
-        expect(flash[:notice]).to eq 'Example has been deleted!'
+        expect(flash[:notice]).not_to be_empty
         expect(response).to redirect_to phrase_path(phrase)
       end
     end
@@ -56,8 +55,8 @@ RSpec.describe ExamplesController do
         sign_in user
 
         delete :destroy, params: { phrase_id: phrase.id, id: another_example.id }
-  
-        expect(flash[:notice]).to eq 'Example has been deleted!'
+
+        expect(flash[:notice]).not_to be_empty
         expect(response).to redirect_to phrase_path(phrase)
       end
     end
@@ -69,12 +68,15 @@ RSpec.describe ExamplesController do
         sign_in another_user
 
         delete :destroy, params: { phrase_id: phrase.id, id: example.id }
+
         expect(flash[:danger]).not_to be_empty
         expect(response).to redirect_to root_path
       end
     end
   end
 
+
+  # testing voting functionality
   describe '#shared_vote' do
     let (:author) { FactoryBot.create(:user) }
     let (:example) { FactoryBot.create(:example, user: author) }
@@ -94,8 +96,6 @@ RSpec.describe ExamplesController do
         expect(author.carma).to eq 2
       end
     end
-
-
 
     context 'when user unvotes an example' do
 

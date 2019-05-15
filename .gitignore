@@ -31,4 +31,4 @@ yarn-debug.log*
 .yarn-integrity
 
 #Ignore failed tests file
-/spec/failures.txt
+spec/failures.txt
