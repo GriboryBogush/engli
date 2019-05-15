@@ -21,10 +21,11 @@ class ExamplesController < ApplicationController
   def destroy
     if @example.destroy
       flash[:notice] = 'Example has been deleted!'
-      redirect_back(fallback_location: root_path)
     else
       flash[:danger] = @example.errors.full_messages.to_sentence
     end
+    #redirect :back doesn't really seem to work (
+    redirect_to phrase_path(@phrase)
   end
 
   # Allow users to vote for examples
@@ -43,7 +44,7 @@ class ExamplesController < ApplicationController
   end
 
   def init_example!
-    @example = @phrase.examples.find(params[:example_id])
+    @example = @phrase.examples.find(params[:id])
   end
 
   # should disallow changing other user's phrases
@@ -52,7 +53,10 @@ class ExamplesController < ApplicationController
     @example = @phrase.examples.find(params[:id])
     unless (@example.user  == current_user || @phrase.author?(current_user))
       flash[:danger] = 'You are not author of the phrase/example!'
-      redirect_back(fallback_location: root_path)
+
+      # !! Is expected to redirect to root_path in tests
+      #redirect_back(fallback_location: root_path)
+      redirect_to root_path
       return false
     end
     true

@@ -32,7 +32,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8'
-  gem 'rails-controller-testing'
+
+  # ! fork that fixes compatability of 'assert_template' with rails 6
+  gem 'rails-controller-testing', git: 'https://github.com/cpruitt/rails-controller-testing', branch: 'rails-6-compat-template-assertion'
   gem 'factory_bot_rails'
 end
 
