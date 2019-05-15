@@ -10,20 +10,34 @@ RSpec.describe Example do
     end
     it { is_expected.to validate_presence_of(:example) }
     it { is_expected.to validate_uniqueness_of(:example).scoped_to(:phrase_id) }
-    it { should validate_uniqueness_of(:example).scoped_to(:phrase_id) }
   end
 
   describe "#author?" do
-    let(:author) { build(:user) }
+    let(:author) { create(:user) }
     let(:not_author) { build(:user) }
     let(:example) { build(:example, user: author) }
 
     it "returns true if author is the same" do
-      expect(example.author?(author)).to be_true
+      expect(example.author?(author)).to be true
     end
 
     it "returns true if author is different" do
-      expect(example.author?(not_author)).to be_false
+      expect(example.author?(not_author)).to be false
+    end
+  end
+
+  describe "carma is properly calculated" do
+    it "is should equal zero" do
+      author = FactoryBot.build(:user)
+      example = FactoryBot.build(:example, user: author)
+      voter  = FactoryBot.build(:user)
+
+      example.set_carma('up', voter)
+      example.redo_carma('down', voter)
+      example.unset_carma('down', voter)
+
+      expect(voter.carma).to eq 0
+      expect(author.carma).to eq 0
     end
   end
 end
