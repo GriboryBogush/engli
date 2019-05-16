@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ExamplesController do
+  let(:user) { create(:user) }
 
   describe 'POST show/:id/create' do
-    let(:user) { create(:user) }
     let(:phrase) { create(:phrase, user: user) }
     before { sign_in user }
 
@@ -22,7 +24,6 @@ RSpec.describe ExamplesController do
 
     context 'when the example is invalid' do
       it 'doesn\t create and example and redirects to phrase :show path' do
-
         post :create, params: { phrase_id: phrase.id, example: attributes_for(:example, :invalid) }
 
         expect(flash[:danger]).not_to be_empty
@@ -32,11 +33,10 @@ RSpec.describe ExamplesController do
   end
 
   describe 'DELETE destroy/:id' do
-    let(:user) { create(:user) }
     let(:phrase) { create(:phrase, user: user) }
-    let (:example) { create(:example, phrase: phrase, user: user) }
+    let(:example) { create(:example, phrase: phrase, user: user) }
 
-    context 'when user is the author of the example' do
+    context 'when user is the user of the example' do
       it 'deletes an example and redirects to phrase :show path' do
         sign_in user
 
@@ -47,8 +47,7 @@ RSpec.describe ExamplesController do
       end
     end
 
-    # for some reason fails second assert even though in browser it does redirect correctly
-    context 'when user is the author of the phrase' do
+    context 'when user is the user of the phrase' do
       it 'deletes an example and redirects to phrase :show path' do
         another_user = create(:user)
         another_example = create(:example, phrase: phrase, user: another_user)
@@ -61,8 +60,7 @@ RSpec.describe ExamplesController do
       end
     end
 
-    # for some reason fails second assert even though in browser it does redirect correctly
-    context 'when user is not an author of example/phrase' do
+    context 'when user is not an user of example/phrase' do
       it 'does not delete an example and redirects to root_path' do
         another_user = create(:user)
         sign_in another_user
@@ -75,16 +73,13 @@ RSpec.describe ExamplesController do
     end
   end
 
-
   # testing voting functionality
   describe '#shared_vote' do
-    let (:author) { FactoryBot.create(:user) }
-    let (:example) { FactoryBot.create(:example, user: author) }
-    let (:voter) { FactoryBot.create(:user) }
+    let(:example) { create(:example, user: user) }
+    let(:voter) { create(:user) }
 
     context 'when user upvotes an example' do
-
-      before { controller.shared_vote(example, 'up', voter) }
+      before { controller.shared_vote('up', example, voter) }
 
       it 'ups score of an example' do
         expect(example.weighted_score).to eq 1
@@ -92,16 +87,15 @@ RSpec.describe ExamplesController do
       it 'ups voter carma' do
         expect(voter.carma).to eq 1
       end
-      it 'increments author carma by 4' do
-        expect(author.carma).to eq 2
+      it 'increments user carma by 4' do
+        expect(user.carma).to eq 2
       end
     end
 
     context 'when user unvotes an example' do
-
       before do
-        controller.shared_vote(example, 'up', voter)
-        controller.shared_vote(example, 'up', voter)
+        controller.shared_vote('up', example, voter)
+        controller.shared_vote('up', example, voter)
       end
 
       it 'decrements example scroe' do
@@ -111,25 +105,24 @@ RSpec.describe ExamplesController do
         expect(voter.carma).to eq 0
       end
       it 'decrements voter carma' do
-        expect(author.carma).to eq 0
+        expect(user.carma).to eq 0
       end
     end
 
     context 'when user changes vote on example' do
-
       before do
-        controller.shared_vote(example, 'up', voter)
-        controller.shared_vote(example, 'down', voter)
+        controller.shared_vote('up', example, voter)
+        controller.shared_vote('down', example, voter)
       end
 
       it 'changes example score' do
-        expect(example.weighted_score).to eq -1
+        expect(example.weighted_score).to eq(-1)
       end
       it 'changes voter\' carma' do
         expect(voter.carma).to eq 1
       end
-      it 'changes author\'s carma' do
-        expect(author.carma).to eq -1
+      it 'changes user\'s carma' do
+        expect(user.carma).to eq(-1)
       end
     end
   end

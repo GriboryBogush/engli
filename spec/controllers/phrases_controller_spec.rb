@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PhrasesController do
-
   describe 'user tries to access index page' do
     context 'when not logged in ' do
       it 'redirect to log in page' do
@@ -10,7 +11,6 @@ RSpec.describe PhrasesController do
       end
     end
   end
-
 
   describe 'GET index' do
     it 'renders the :index page' do
@@ -33,9 +33,7 @@ RSpec.describe PhrasesController do
     end
   end
 
-
   describe 'POST create' do
-
     before do
       user = create(:user)
       sign_in user
@@ -43,29 +41,26 @@ RSpec.describe PhrasesController do
 
     context 'when the phrase is valid ' do
       it 'creates a phrase and redirects to :index page' do
-
-        post :create, params: { phrase:  attributes_for(:phrase)  }
+        post :create, params: { phrase:  attributes_for(:phrase) }
 
         expect(flash[:notice]).not_to be_empty
-        expect(response).to  redirect_to root_path
+        expect(response).to redirect_to root_path
       end
     end
 
     context 'when the phrase is invalid' do
       it 're-renders the :new page' do
-
         post :create, params: { phrase: attributes_for(:phrase, :invalid) }
 
         expect(flash[:danger]).not_to be_empty
-        expect(response).to  render_template :new
+        expect(response).to render_template :new
       end
     end
   end
 
   describe 'PUT update/:id' do
-
-    let (:user) { create(:user) }
-    let (:phrase) { create(:phrase, user: user) }
+    let(:user) { create(:user) }
+    let(:phrase) { create(:phrase, user: user) }
 
     context 'when the user is the author ' do
       it 'updates the phrase and redirects to user :show' do
@@ -103,9 +98,8 @@ RSpec.describe PhrasesController do
   end
 
   describe 'DELETE destroy/:id' do
-
-    let (:user) { create(:user) }
-    let (:phrase) { create(:phrase, user: user) }
+    let(:user) { create(:user) }
+    let(:phrase) { create(:phrase, user: user) }
 
     context 'when the user is the author' do
       it 'deletes the phrase and redirects to user :show' do
@@ -129,19 +123,16 @@ RSpec.describe PhrasesController do
         expect(response).to redirect_to(root_path)
       end
     end
-
   end
-
 
   # testing voting functionality
   describe '#shared_vote' do
-    let (:author) { FactoryBot.create(:user) }
-    let (:phrase) { FactoryBot.create(:phrase, user: author) }
-    let (:voter) { FactoryBot.create(:user) }
+    let(:author) { FactoryBot.create(:user) }
+    let(:phrase) { FactoryBot.create(:phrase, user: author) }
+    let(:voter) { FactoryBot.create(:user) }
 
     context 'user upvotes a phrase' do
-
-      before { controller.shared_vote(phrase, 'up', voter) }
+      before { controller.shared_vote('up', phrase, voter) }
 
       it 'ups score of a phrase' do
         expect(phrase.weighted_score).to eq 1
@@ -155,10 +146,9 @@ RSpec.describe PhrasesController do
     end
 
     context 'user unvotes a phrase' do
-
       before do
-        controller.shared_vote(phrase, 'up', voter)
-        controller.shared_vote(phrase, 'up', voter)
+        controller.shared_vote('up', phrase, voter)
+        controller.shared_vote('up', phrase, voter)
       end
 
       it 'decrements phrase scroe' do
@@ -173,20 +163,19 @@ RSpec.describe PhrasesController do
     end
 
     context 'changes vote on phrase' do
-
       before do
-        controller.shared_vote(phrase, 'up', voter)
-        controller.shared_vote(phrase, 'down', voter)
+        controller.shared_vote('up', phrase, voter)
+        controller.shared_vote('down', phrase, voter)
       end
 
       it 'changes phrase score' do
-        expect(phrase.weighted_score).to eq -1
+        expect(phrase.weighted_score).to eq(-1)
       end
       it 'changes voter\' carma' do
         expect(voter.carma).to eq 1
       end
       it 'changes author\'s carma' do
-        expect(author.carma).to eq -2
+        expect(author.carma).to eq(-2)
       end
     end
   end

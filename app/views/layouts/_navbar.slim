@@ -14,7 +14,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
         li.nav-item.active
           a.nav-link href="#{new_phrase_path}" New
         li.nav-item.active
-          - if current_user.has_new_notifications?
+          - if current_user.new_notifications?
             a.nav-link href="#{notifications_path}" !!!Notifications
           - else
             a.nav-link href="#{notifications_path}" Notifications
