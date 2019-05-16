@@ -132,7 +132,7 @@ RSpec.describe PhrasesController do
     let(:voter) { FactoryBot.create(:user) }
 
     context 'user upvotes a phrase' do
-      before { controller.shared_vote(phrase, 'up', voter) }
+      before { controller.shared_vote('up', phrase, voter) }
 
       it 'ups score of a phrase' do
         expect(phrase.weighted_score).to eq 1
@@ -147,8 +147,8 @@ RSpec.describe PhrasesController do
 
     context 'user unvotes a phrase' do
       before do
-        controller.shared_vote(phrase, 'up', voter)
-        controller.shared_vote(phrase, 'up', voter)
+        controller.shared_vote('up', phrase, voter)
+        controller.shared_vote('up', phrase, voter)
       end
 
       it 'decrements phrase scroe' do
@@ -164,8 +164,8 @@ RSpec.describe PhrasesController do
 
     context 'changes vote on phrase' do
       before do
-        controller.shared_vote(phrase, 'up', voter)
-        controller.shared_vote(phrase, 'down', voter)
+        controller.shared_vote('up', phrase, voter)
+        controller.shared_vote('down', phrase, voter)
       end
 
       it 'changes phrase score' do

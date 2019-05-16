@@ -28,7 +28,7 @@ class ExamplesController < ApplicationController
 
   # Allow users to vote for examples
   def vote
-    shared_vote(@example, params[:vote], current_user)
+    shared_vote(params[:vote], @example, current_user)
     redirect_back(fallback_location: root_path)
   end
 

@@ -79,7 +79,7 @@ RSpec.describe ExamplesController do
     let(:voter) { create(:user) }
 
     context 'when user upvotes an example' do
-      before { controller.shared_vote(example, 'up', voter) }
+      before { controller.shared_vote('up', example, voter) }
 
       it 'ups score of an example' do
         expect(example.weighted_score).to eq 1
@@ -94,8 +94,8 @@ RSpec.describe ExamplesController do
 
     context 'when user unvotes an example' do
       before do
-        controller.shared_vote(example, 'up', voter)
-        controller.shared_vote(example, 'up', voter)
+        controller.shared_vote('up', example, voter)
+        controller.shared_vote('up', example, voter)
       end
 
       it 'decrements example scroe' do
@@ -111,8 +111,8 @@ RSpec.describe ExamplesController do
 
     context 'when user changes vote on example' do
       before do
-        controller.shared_vote(example, 'up', voter)
-        controller.shared_vote(example, 'down', voter)
+        controller.shared_vote('up', example, voter)
+        controller.shared_vote('down', example, voter)
       end
 
       it 'changes example score' do

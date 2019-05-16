@@ -14,31 +14,19 @@ RSpec.describe Phrase do
   end
 
   describe '#author?' do
-    author = FactoryBot.build(:user)
-    not_author = FactoryBot.build(:user)
-    phrase = FactoryBot.build(:phrase, user: author)
+    let(:author) { build(:user) }
+    let(:not_author) { build(:user) }
+    let(:phrase) { build(:phrase, user: author) }
 
-    it 'returns true if author is the same' do
-      expect(phrase.author?(author)).to eq true
+    context 'author is the same' do
+      it 'returns true' do
+        expect(phrase.author?(author)).to be true
+      end
     end
-
-    it 'returns true if author is different' do
-      expect(phrase.author?(not_author)).to eq false
-    end
-  end
-
-  describe 'carma is properly calculated' do
-    it 'is should equal zero' do
-      author = FactoryBot.build(:user)
-      phrase = FactoryBot.build(:phrase, user: author)
-      voter  = FactoryBot.build(:user)
-
-      phrase.set_carma('up', voter)
-      phrase.redo_carma('down', voter)
-      phrase.unset_carma('down', voter)
-
-      expect(voter.carma).to eq 0
-      expect(author.carma).to eq 0
+    context 'author is different' do
+      it 'returns true' do
+        expect(phrase.author?(not_author)).to be false
+      end
     end
   end
 end

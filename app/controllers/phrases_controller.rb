@@ -63,7 +63,7 @@ class PhrasesController < ApplicationController
 
   # Allow users to vote for phrases
   def vote
-    shared_vote(@phrase, params[:vote], current_user)
+    shared_vote(params[:vote], @phrase, current_user)
     redirect_back(fallback_location: root_path)
   end
 

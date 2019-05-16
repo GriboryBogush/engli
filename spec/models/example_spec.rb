@@ -30,19 +30,4 @@ RSpec.describe Example do
       end
     end
   end
-
-  describe 'carma is properly calculated' do
-    it 'is should equal zero' do
-      author = FactoryBot.build(:user)
-      example = FactoryBot.build(:example, user: author)
-      voter = FactoryBot.build(:user)
-
-      example.set_carma('up', voter)
-      example.redo_carma('down', voter)
-      example.unset_carma('down', voter)
-
-      expect(voter.carma).to eq 0
-      expect(author.carma).to eq 0
-    end
-  end
 end
