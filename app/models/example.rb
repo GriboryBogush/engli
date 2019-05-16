@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
+# Example reprsenets an example of a phrase being used
+# Has votable functionality
 class Example < ApplicationRecord
-  #includes author?, set_carma, redo_carma, unset_carma methods
+  # includes author?, set_carma, redo_carma, unset_carma methods
   include SharedMethods
 
   # ??? Used for making notifications on controller actions

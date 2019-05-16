@@ -69,3 +69,5 @@ gem 'will_paginate-bootstrap4'
 gem 'friendly_id'
 gem 'acts_as_votable'
 gem 'public_activity', '<= 1.5.0'
+gem 'rubocop', '~> 0.69.0', require: false
+gem 'rubocop-performance'
