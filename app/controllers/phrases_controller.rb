@@ -81,11 +81,7 @@ class PhrasesController < ApplicationController
   def authorship_filter
     unless @phrase.author? current_user
       flash[:danger] = 'You are not author of the phrase!'
-      # !! Is expected to redirect to root_path in tests
-      # redirect_back(fallback_location: root_path)
       redirect_to root_path
-      return false
     end
-    true
   end
 end
