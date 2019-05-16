@@ -16,12 +16,7 @@ class ApplicationController < ActionController::Base
     if !voter.voted_for? votable
       helpers.new_vote(vote, votable, voter)
     else
-      if (vote == 'up' && voter.voted_up_on?(votable)) ||
-         (vote == 'down' && voter.voted_down_on?(votable))
-        helpers.undo_vote(vote, votable, voter)
-      else
-        helpers.change_vote(vote, votable, voter)
-      end
+      helpers.change_vote(vote, votable, voter)
     end
 
     # Send email to author on every 5 upvotes

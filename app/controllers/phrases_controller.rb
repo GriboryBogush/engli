@@ -32,10 +32,11 @@ class PhrasesController < ApplicationController
     if @phrase.save
       flash[:notice] = 'Phrase has been created'
       redirect_to root_path
-    else
-      flash.now[:danger] = @phrase.errors.full_messages.to_sentence
-      render :new
+      return
     end
+
+    flash.now[:danger] = @phrase.errors.full_messages.to_sentence
+    render :new
   end
 
   def edit; end
@@ -48,10 +49,11 @@ class PhrasesController < ApplicationController
     if @phrase.update(params)
       flash[:notice] = 'Phrase has been updated'
       redirect_to user_path(@phrase.user)
-    else
-      flash.now[:danger] = @phrase.errors.full_messages.to_sentence
-      render :edit
+      return
     end
+
+    flash.now[:danger] = @phrase.errors.full_messages.to_sentence
+    render :edit
   end
 
   def destroy
