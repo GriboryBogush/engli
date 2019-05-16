@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Examples can be created, destroyed and voted on, belonging to a phrase
+
 class ExamplesController < ApplicationController
   # Set phrase/example where it's needed
   before_action :init_phrase!, only: %i[create destroy vote]

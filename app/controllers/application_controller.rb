@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Has a lot of common functionality used thoughout application  
 class ApplicationController < ActionController::Base
   # ??
   protect_from_forgery with: :exception

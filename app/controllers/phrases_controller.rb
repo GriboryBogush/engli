@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Phrases can be shown, created, edited, deleted and voted on 
+
 class PhrasesController < ApplicationController
   # set phrase for every action that needs it
   before_action :init_phrase, only: %i[show edit update destroy vote]
