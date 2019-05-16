@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Example do
@@ -12,13 +14,13 @@ RSpec.describe Example do
     it { is_expected.to validate_uniqueness_of(:example).scoped_to(:phrase_id) }
   end
 
-  describe "#author?" do
+  describe '#author?' do
     let(:author) { create(:user) }
     let(:not_author) { build(:user) }
     let(:example) { build(:example, user: author) }
 
     context 'author is the same' do
-      it "returns true" do
+      it 'returns true' do
         expect(example.author?(author)).to be true
       end
     end
@@ -29,11 +31,11 @@ RSpec.describe Example do
     end
   end
 
-  describe "carma is properly calculated" do
-    it "is should equal zero" do
+  describe 'carma is properly calculated' do
+    it 'is should equal zero' do
       author = FactoryBot.build(:user)
       example = FactoryBot.build(:example, user: author)
-      voter  = FactoryBot.build(:user)
+      voter = FactoryBot.build(:user)
 
       example.set_carma('up', voter)
       example.redo_carma('down', voter)
