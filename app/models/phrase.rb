@@ -2,7 +2,7 @@
 
 # Phrase has functionality of a votable
 # PublicActivity is used to add notifications on every 5 upvotes
-class Phrase < ApplicationRecor
+class Phrase < ApplicationRecord
   # includes author?, set_carma, redo_carma, unset_carma methods
   include SharedMethods
 
