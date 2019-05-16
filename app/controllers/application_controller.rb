@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Has a lot of common functionality used thoughout application  
+# Has a lot of common functionality used thoughout application
 class ApplicationController < ActionController::Base
   # ??
   protect_from_forgery with: :exception
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   # shared_vote is used to implement voting functionality for
   # Phrase/Example models
   def shared_vote(vote, votable, voter)
-    unless voter.voted_for? votable
+    if !voter.voted_for? votable
       helpers.new_vote(vote, votable, voter)
     else
       if (vote == 'up' && voter.voted_up_on?(votable)) ||
@@ -46,10 +46,10 @@ class ApplicationController < ActionController::Base
     else
       invalid = Phrase.friendly.find(params[:id]).author? current_user
     end
+    return true unless invalid
 
-    if invalid
-      flash[:danger] = 'You cannot vote for your own phrases/examples.'
-      redirect_back(fallback_location: root_path)
-    end
+    flash[:danger] = 'You cannot vote for your own phrases/examples.'
+    redirect_back(fallback_location: root_path)
+    false
   end
 end

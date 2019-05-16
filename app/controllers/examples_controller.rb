@@ -50,9 +50,10 @@ class ExamplesController < ApplicationController
 
   # should disallow changing other user's phrases
   def authorship_filter
-    unless @example.user == current_user || @phrase.author?(current_user)
-      flash[:danger] = 'You are not author of the phrase or example!'
-      redirect_to root_path
-    end
+    return true if @example.user == current_user || @phrase.author?(current_user)
+
+    flash[:danger] = 'You are not author of the phrase or example!'
+    redirect_to root_path
+    false
   end
 end

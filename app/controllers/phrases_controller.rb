@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Phrases can be shown, created, edited, deleted and voted on 
+# Phrases can be shown, created, edited, deleted and voted on
 
 class PhrasesController < ApplicationController
   # set phrase for every action that needs it
@@ -45,7 +45,7 @@ class PhrasesController < ApplicationController
 
     # convert category number from string to int due to select element ??
     params[:category] = params[:category].to_i
-    if @phrase.update_attributes(params)
+    if @phrase.update(params)
       flash[:notice] = 'Phrase has been updated'
       redirect_to user_path(@phrase.user)
     else
@@ -72,7 +72,10 @@ class PhrasesController < ApplicationController
   private
 
   def phrase_params
-    params.require(:phrase).permit(:phrase, :translation, :category, examples_attributes: %i[example user_id _destroy])
+    params.require(:phrase).permit(
+      :phrase, :translation, :category,
+      examples_attributes: %i[example user_id _destroy]
+    )
   end
 
   def init_phrase
@@ -81,9 +84,10 @@ class PhrasesController < ApplicationController
 
   # should disallow changing other user's phrases
   def authorship_filter
-    unless @phrase.author? current_user
-      flash[:danger] = 'You are not author of the phrase!'
-      redirect_to root_path
-    end
+    return true if @phrase.author? current_user
+
+    flash[:danger] = 'You are not author of the phrase!'
+    redirect_to root_path
+    false
   end
 end
