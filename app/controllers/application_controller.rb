@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # ??
   protect_from_forgery with: :exception
@@ -7,13 +9,12 @@ class ApplicationController < ActionController::Base
   # Run #vote_filter for both phrase and example controllers
   before_action :vote_filter, only: [:vote]
 
-
-  # shared_vote is used to implement voting functionality for both Phrase and Example models
-  # NOTE might be buggy after reformating
+  # shared_vote is used to implement voting functionality for
+  # Phrase/Example models
+  # FIXME: refractor the method
   def shared_vote(votable, vote, user)
-
-    #lambda for common functionality
-    up_or_down = lambda { |vote| vote == 'up' ? votable.upvote_by(user) : votable.downvote_by(user) }
+    # lambda for common functionality
+    up_or_down = ->(vote) { vote == 'up' ? votable.upvote_by(user) : votable.downvote_by(user) }
 
     if user.voted_for? votable
       if (vote == 'up' && user.voted_up_on?(votable)) || (vote == 'down' && user.voted_down_on?(votable))
@@ -41,15 +42,14 @@ class ApplicationController < ActionController::Base
     if votable.class.name == 'Phrase' && votable.weighted_score % 5 == 0 && votable.weighted_score / 5 > 0
       ApplicationMailer.with(user: votable.user, phrase: votable).notify_five_upvotes.deliver_later
     end
-
   end
 
   private
 
   # Cutstomize strong parameters for Devise to sign_in/sign_up with username
   def configure_permitted_parameters
-    attributes = [:username, :full_name, :age, :pro]
-    devise_parameter_sanitizer.permit(:sign_in, keys: [ :username ])
+    attributes = %i[username full_name age pro]
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
   end
@@ -68,5 +68,4 @@ class ApplicationController < ActionController::Base
       redirect_back(fallback_location: root_path)
     end
   end
-
 end

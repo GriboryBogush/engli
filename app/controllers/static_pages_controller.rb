@@ -1,7 +1,7 @@
+# frozen_string_literal: true
 
-# Displays a static page  
+# Displays a static page
 
 class StaticPagesController < ApplicationController
-  def hello
-  end
+  def hello; end
 end

@@ -1,11 +1,10 @@
+# frozen_string_literal: true
 
 class ExamplesController < ApplicationController
-
   # Set phrase/example where it's needed
-  before_action :init_phrase!, only: [:create, :destroy, :vote]
-  before_action :init_example!, only: [:destroy, :vote]
+  before_action :init_phrase!, only: %i[create destroy vote]
+  before_action :init_example!, only: %i[destroy vote]
   before_action :authorship_filter, only: [:destroy]
-
 
   def create
     @example = @phrase.examples.new(example_params)
@@ -15,7 +14,6 @@ class ExamplesController < ApplicationController
       flash[:danger] = @example.errors.full_messages.to_sentence
     end
     redirect_to phrase_path(@phrase)
-
   end
 
   def destroy
@@ -24,7 +22,7 @@ class ExamplesController < ApplicationController
     else
       flash[:danger] = @example.errors.full_messages.to_sentence
     end
-    #redirect :back doesn't really seem to work (
+    # redirect :back doesn't really seem to work (
     redirect_to phrase_path(@phrase)
   end
 
@@ -35,6 +33,7 @@ class ExamplesController < ApplicationController
   end
 
   private
+
   def example_params
     params.require(:example).permit(:example, :user_id)
   end
@@ -51,15 +50,14 @@ class ExamplesController < ApplicationController
   def authorship_filter
     @phrase = Phrase.friendly.find(params[:phrase_id])
     @example = @phrase.examples.find(params[:id])
-    unless (@example.user  == current_user || @phrase.author?(current_user))
+    unless @example.user == current_user || @phrase.author?(current_user)
       flash[:danger] = 'You are not author of the phrase/example!'
 
       # !! Is expected to redirect to root_path in tests
-      #redirect_back(fallback_location: root_path)
+      # redirect_back(fallback_location: root_path)
       redirect_to root_path
       return false
     end
     true
   end
-
 end

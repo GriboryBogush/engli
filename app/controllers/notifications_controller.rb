@@ -1,5 +1,6 @@
-class NotificationsController < ApplicationController
+# frozen_string_literal: true
 
+class NotificationsController < ApplicationController
   # Show all notifications for current user
   def index
     @notifications = PublicActivity::Activity.where(recipient_id: current_user.id)
@@ -8,7 +9,7 @@ class NotificationsController < ApplicationController
   # Set read status of every notification to true
   # Called using JS Ajax on #index visit
   def read_all
-    PublicActivity::Activity.where(recipient_id: current_user.id).update_all({read: true})
+    PublicActivity::Activity.where(recipient_id: current_user.id).update_all(read: true)
     head :ok
   end
 end
