@@ -35,12 +35,12 @@ class ApplicationController < ActionController::Base
 
   # Disallow to vote for own examples and phrases
   def vote_filter
-    if params[:controller] == 'examples'
-      phrase = Phrase.friendly.find(params[:phrase_id])
-      invalid = phrase.examples.find(params[:id]).author? current_user
-    else
-      invalid = Phrase.friendly.find(params[:id]).author? current_user
-    end
+    invalid = if params[:controller] == 'examples'
+                phrase = Phrase.friendly.find(params[:phrase_id])
+                phrase.examples.find(params[:id]).author? current_user
+              else
+                Phrase.friendly.find(params[:id]).author? current_user
+              end
     return true unless invalid
 
     flash[:danger] = 'You cannot vote for your own phrases/examples.'

@@ -1,3 +1,5 @@
+# Application helper is used for methods that are general
+# and can be used whenever needed
 module ApplicationHelper
   # Format date like: Tuesday 30 Apr 2019
   def date_formatter(date)

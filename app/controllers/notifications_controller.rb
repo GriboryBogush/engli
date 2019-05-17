@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # Used to show and update status of notifications
-
 class NotificationsController < ApplicationController
   # Show all notifications for current user
   def index

@@ -1,12 +1,18 @@
 
 Metrics/LineLength:
   Max: 120
-  
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Metrics/MethodLength:
+  Max: 15
+  
 AllCops:
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
+    - 'node_modules/**/*'
+    - 'bin/**/*'
+    - 'spec/spec_helper.rb'

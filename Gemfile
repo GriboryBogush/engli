@@ -37,7 +37,8 @@ group :development, :test do
 
   # ! fork that fixes compatability of 'assert_template' with rails 6
   gem 'factory_bot_rails'
-  gem 'rails-controller-testing', git: 'https://github.com/cpruitt/rails-controller-testing', branch: 'rails-6-compat-template-assertion'
+  gem 'rails-controller-testing', git: 'https://github.com/cpruitt/rails-controller-testing',
+                                  branch: 'rails-6-compat-template-assertion'
 end
 
 group :development do
