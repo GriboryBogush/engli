@@ -10,12 +10,12 @@ tr
   - else
     td
       - if phrase.author? current_user
-        = link_to 'Edit', edit_phrase_path(phrase.id)
+        = link_to 'Edit', edit_phrase_path(phrase.id), class: 'badge badge-pill badge-info'
         | &nbsp;
-        = link_to 'Delete', phrase, method: :delete
+        = link_to 'Delete', phrase, method: :delete, class: 'badge badge-pill badge-danger'
   td
-    = link_to 'UP', vote_phrase_path(phrase, vote: 'up'), method: :post
+    = link_to 'UP', vote_phrase_path(phrase, vote: 'up'), method: :post, class: 'badge badge-pill badge-primary'
     | &nbsp;
     = phrase.weighted_score
     | &nbsp;
-    = link_to 'DOWN', vote_phrase_path(phrase, vote: 'down'), method: :post
+    = link_to 'DOWN', vote_phrase_path(phrase, vote: 'down'), method: :post, class: 'badge badge-pill badge-secondary'

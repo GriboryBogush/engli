@@ -23,9 +23,9 @@ table.table
   .form-group
     = f.label :example
     br
-    = f.text_field :example, class: "form-control"
-    = f.hidden_field :user_id, class: "form-control"
-  = f.submit "Create Example", class: "btn btn-primary"
+    = f.text_field :example, class: 'form-control'
+    = f.hidden_field :user_id, class: 'form-control'
+  = f.submit 'Create Example', class: 'btn btn-primary'
 
 h4 Examples
 table.table
@@ -37,19 +37,7 @@ table.table
     th Votes
 
   - @examples.each do |example|
-    tr
-      td = example.example
-      td = example.user.username
-      td = date_formatter(example.created_at)
-      td
-        - if show_example_delete_link? example
-           = link_to 'Delete', phrase_example_path(example.phrase, example), class: 'delete_phrase', method: :delete
-      td
-        = link_to 'UP', phrase_example_vote_path(example.phrase, example, vote: 'up'), method: :post
-        | &nbsp;
-        = example.weighted_score
-        | &nbsp;
-        = link_to 'DOWN', phrase_example_vote_path(example.phrase, example, vote: 'down'), method: :post
+    = render partial: example, locals: { example: example }
 
 
 = will_paginate @examples, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

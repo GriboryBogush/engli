@@ -1,34 +1,27 @@
 
 = form_for(@phrase) do |f|
 
-  /- if @phrase.errors.any?
-  /  #error_explanation
-  /    h2 #{ pluralize(@phrase.errors.count, "error") } phohibited this phrase from being saved:
-  /    ul
-  /      - @phrase.errors.full_messages.each do |message|
-  /        li = message
-
   .form-group
     = f.label :phrase
     br
-    = f.text_field :phrase, class: "form-control"
+    = f.text_field :phrase, class: 'form-control'
 
   .form-group
     = f.label :translation
     br
-    = f.text_field :translation, class: "form-control"
+    = f.text_field :translation, class: 'form-control'
 
   .form-group
     = f.label :category
-    = f.select :category, Phrase::CATEGORIES, {}, { class: "form-control"}
+    = f.select :category, Phrase::CATEGORIES, {}, class: 'form-control'
 
   - if @phrase.id.nil?
     = f.fields_for :examples do |ff|
       .form-group
         = ff.label :example
         br
-        = ff.text_field :example, class: "form-control"
-        = ff.hidden_field :user_id, :class => 'form-control'
+        = ff.text_field :example, class: 'form-control'
+        = ff.hidden_field :user_id, class: 'form-control'
 
   .actions
-    = f.submit "Submit", class: "btn btn-primary"
+    = f.submit 'Submit', class: 'btn btn-primary'

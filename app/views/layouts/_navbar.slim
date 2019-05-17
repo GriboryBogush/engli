@@ -1,27 +1,24 @@
 
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container
-    a.navbar-brand href="#{root_path}" Phrases
-    button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+    a.navbar-brand href='#{root_path}' Phrases
+    button.navbar-toggler type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'
       span.navbar-toggler-icon
 
-    .collapse.navbar-collapse id="navbarSupportedContent"
+    .collapse.navbar-collapse id='navbarSupportedContent'
       ul.navbar-nav.ml-auto
         li.nav-item.active
-          a.nav-link href="#{static_pages_hello_path}" Hello
+          a.nav-link href='#{static_pages_hello_path}' Hello
         li.nav-item.active
-          a.nav-link href="#{users_path}" Users
-        li.nav-item.active
-          a.nav-link href="#{new_phrase_path}" New
+          a.nav-link href='#{users_path}' Users
         li.nav-item.active
           - if current_user.new_notifications?
-            a.nav-link href="#{notifications_path}" !!!Notifications
-          - else
-            a.nav-link href="#{notifications_path}" Notifications
+            span.badge.badge-info New!
+          a.nav-link href='#{notifications_path}' Notifications
         li.nav-item.dropdown
-          a.nav-link.dropdown-toggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" = current_user.username
-          .dropdown-menu aria-labelledby="navbarDropdown"
-            = link_to('View Profile', user_path(current_user) , class: "dropdown-item")
-            = link_to('Edit Profile', edit_user_registration_path, class: "dropdown-item")
+          a.nav-link.dropdown-toggle href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' = current_user.username
+          .dropdown-menu aria-labelledby='navbarDropdown'
+            = link_to('View Profile', user_path(current_user) , class: 'dropdown-item')
+            = link_to('Edit Profile', edit_user_registration_path, class: 'dropdown-item')
             .dropdown-divider
-            = link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item")
+            = link_to('Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item')

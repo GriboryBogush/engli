@@ -12,6 +12,8 @@ table.table
     th Votes
 
   - @phrases.each do |phrase|
-    = render :partial => phrase, locals: { :author => false }
+    = render partial: phrase, locals: { author: false }
 
 = will_paginate @phrases, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+
+= link_to 'New', new_phrase_path, class: 'btn btn-primary', attributes: { role: 'button' }

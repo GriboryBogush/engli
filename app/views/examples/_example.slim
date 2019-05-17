@@ -1,0 +1,14 @@
+
+tr
+  td = example.example
+  td = example.user.username
+  td = date_formatter(example.created_at)
+  td
+    - if show_example_delete_link? example
+       = link_to 'Delete', phrase_example_path(example.phrase, example), method: :delete, class: 'badge badge-pill badge-danger'
+  td
+    = link_to 'UP', phrase_example_vote_path(example.phrase, example, vote: 'up'), method: :post, class: 'badge badge-pill badge-primary'
+    | &nbsp;
+    = example.weighted_score
+    | &nbsp;
+    = link_to 'DOWN', phrase_example_vote_path(example.phrase, example, vote: 'down'), method: :post, class: 'badge badge-pill badge-secondary'

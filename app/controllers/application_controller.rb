@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   def shared_vote(vote, votable, voter)
     if !voter.voted_for? votable
       helpers.new_vote(vote, votable, voter)
+      helpers.notify_of_vote(vote, votable, voter)
     else
       helpers.change_vote(vote, votable, voter)
     end

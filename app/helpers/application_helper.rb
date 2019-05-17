@@ -14,6 +14,11 @@ module ApplicationHelper
     end
   end
 
+  def notify_of_vote(vote, votable, voter)
+    message = 'up' ? 'liked your' : 'disliked your'
+    votable.create_activity key: message, owner: voter, recipient: votable.user
+  end
+
   # New vote. Add +4 carma to author, +1 to author
   def new_vote(vote, votable, voter)
     vote == 'up' ? votable.upvote_by(voter) : votable.downvote_by(voter)
