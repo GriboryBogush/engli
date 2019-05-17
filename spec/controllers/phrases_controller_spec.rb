@@ -13,24 +13,11 @@ RSpec.describe PhrasesController do
   end
 
   describe 'GET index' do
-    it 'renders the :index page' do
-      user = create(:user)
-      sign_in user
-
-      get :index
-      expect(response).to render_template :index
-    end
+    it_behaves_like 'has index action'
   end
 
   describe 'GET show/:id' do
-    it 'renders the :show page' do
-      user = create(:user)
-      phrase = create(:phrase, user: user)
-      sign_in user
-
-      get :show, params: { id: phrase.id }
-      expect(response).to render_template :show
-    end
+    it_behaves_like 'has show action', :phrase
   end
 
   describe 'POST create' do

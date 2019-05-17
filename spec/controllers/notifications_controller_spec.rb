@@ -7,10 +7,7 @@ RSpec.describe NotificationsController do
   before { sign_in user }
 
   describe 'GET index' do
-    it 'renders the :index page' do
-      get :index
-      expect(response).to render_template :index
-    end
+    it_behaves_like 'has index action'
   end
 
   describe 'PUT read_all' do

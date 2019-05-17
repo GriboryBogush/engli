@@ -14,19 +14,6 @@ RSpec.describe Phrase do
   end
 
   describe '#author?' do
-    let(:author) { build(:user) }
-    let(:not_author) { build(:user) }
-    let(:phrase) { build(:phrase, user: author) }
-
-    context 'author is the same' do
-      it 'returns true' do
-        expect(phrase.author?(author)).to be true
-      end
-    end
-    context 'author is different' do
-      it 'returns true' do
-        expect(phrase.author?(not_author)).to be false
-      end
-    end
+    it_behaves_like 'has author', :phrase
   end
 end

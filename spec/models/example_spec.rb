@@ -15,19 +15,6 @@ RSpec.describe Example do
   end
 
   describe '#author?' do
-    let(:author) { create(:user) }
-    let(:not_author) { build(:user) }
-    let(:example) { build(:example, user: author) }
-
-    context 'author is the same' do
-      it 'returns true' do
-        expect(example.author?(author)).to be true
-      end
-    end
-    context 'author is different' do
-      it 'returns true ' do
-        expect(example.author?(not_author)).to be false
-      end
-    end
+    it_behaves_like 'has author', :example
   end
 end
