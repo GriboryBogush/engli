@@ -1,41 +1,43 @@
 
 h3 Phrase id #{@phrase.id}
 
-table.table
-  tr
-    th Phrase
-    th Translation
-    th Author
-    th Category
-    th Created
-    th Updated
+table.table.custom-table
+  thead
+    tr
+      th Phrase
+      th Translation
+      th Author
+      th Category
+      th Created
+      th Updated
+  tbody
+    tr
+      td = @phrase.phrase
+      td = @phrase.translation
+      td = link_to @phrase.user.username, user_path(@phrase.user), class: 'simple-link'
+      td = @phrase.category
+      td = date_formatter(@phrase.created_at)
+      td = date_formatter(@phrase.updated_at)
 
-  tr
-    td = @phrase.phrase
-    td = @phrase.translation
-    td = link_to @phrase.user.username, user_path(@phrase.user)
-    td = @phrase.category
-    td = date_formatter(@phrase.created_at)
-    td = date_formatter(@phrase.updated_at)
-
-
+br
 = form_for @example, :url => phrase_examples_path(@phrase) do |f|
   .form-group
     = f.label :example
     br
     = f.text_field :example, class: 'form-control'
     = f.hidden_field :user_id, class: 'form-control'
-  = f.submit 'Create Example', class: 'btn btn-primary'
+  = f.submit 'Create', class: 'btn btn-primary'
+br
 
-h4 Examples
-table.table
-  tr
-    th Example
-    th Author
-    th Created
-    th Actions
-    th Votes
-
+table.table.table-bordered.table-sm.custom-table
+  thead
+    tr
+      th Example
+      th Author
+      th Created
+      th Actions
+      th Votes
+  tbody
   - @examples.each do |example|
     = render partial: example, locals: { example: example }
 

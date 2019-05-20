@@ -1,12 +1,12 @@
 
 tr
   td = phrase.id
-  td = link_to phrase.phrase, phrase_path(phrase)
+  td = link_to phrase.phrase, phrase_path(phrase), class: 'simple-link'
   td = phrase.translation
   td = phrase.category
   - unless author
     td
-      = link_to phrase.user.username, user_path(phrase.user)
+      = link_to phrase.user.username, user_path(phrase.user), class: 'simple-link'
   - else
     td
       - if phrase.author? current_user

@@ -2,15 +2,16 @@
 
 h1  Listing phrases
 
-table.table
-  tr
-    th Id
-    th Phrase
-    th Translation
-    th Category
-    th Author
-    th Votes
-
+table.table.table-bordered.custom-table
+  thead
+    tr
+      th Id
+      th Phrase
+      th Translation
+      th Category
+      th Author
+      th Votes
+  tbody
   - @phrases.each do |phrase|
     = render partial: phrase, locals: { author: false }
 
