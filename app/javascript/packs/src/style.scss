@@ -1,7 +1,4 @@
-$bgDefault      : #c5e1a5;
-$bgHighlight    : #94af76;
-$colDefault     : #eeeeee;
-$colHighlight   : #ffffff;
+@import '_variables.scss';
 
 .content-div {
   background-color: $bgDefault;
