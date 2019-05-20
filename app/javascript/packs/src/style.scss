@@ -6,25 +6,28 @@
   padding: 15px 20px;
   border-radius: 25px;
 }
+
 .custom-table {
   text-align: center;
-}
-.custom-table thead {
-  background-color: $bgHighlight;
-}
 
-.custom-table tbody {
-  background-color: #aed581;
+  thead {
+    background-color: $bgHighlight;
+  }
+
+  tbody {
+    background-color: #aed581;
+  }
 }
 
 .simple-link {
   text-decoration: none;
   color: #f7f7f7;
-}
-.simple-link:visited {
-  text-decoration: none;
-}
-.simple-link:hover {
-  color: $colHighlight;
-  text-decoration: none;
+
+  &:visited {
+    text-decoration: none;
+  }
+  &:hover {
+    color: $colHighlight;
+    text-decoration: none;
+  }
 }

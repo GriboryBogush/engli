@@ -34,14 +34,17 @@
     }
   }
   /* change the color of active or hovered links */
-  .nav-item.active {
-    .nav-link {
-      @extend %highlight-color;
+
+  .nav-item {
+    &.active {
+      .nav-link {
+        @extend %highlight-color;
+      }
     }
-  }
-  .nav-item:hover {
-    .nav-link {
-      @extend %highlight-color;
+    &:hover {
+      .nav-link {
+        @extend %highlight-color;
+      }
     }
   }
 
@@ -52,11 +55,13 @@
   .dropdown-item {
     @extend %default-color;
   }
-  .dropdown-item:hover {
-    @extend .dropdown-item;
-    @extend %highlight-bg-color;
-  }
-  .dropdown-item:focus {
-    @extend .dropdown-item:hover;
+  .dropdown-item {
+    &:hover {
+      @extend .dropdown-item;
+      @extend %highlight-bg-color;
+    }
+    &:focus {
+      @extend .dropdown-item:hover;
+    }
   }
 }
