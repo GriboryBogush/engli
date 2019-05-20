@@ -9,7 +9,9 @@ $colHighlight   : #ffffff;
   padding: 15px 20px;
   border-radius: 25px;
 }
-
+.custom-table {
+  text-align: center;
+}
 .custom-table thead {
   background-color: $bgHighlight;
 }
