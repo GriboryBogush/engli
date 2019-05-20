@@ -5,6 +5,16 @@
 class User < ApplicationRecord
   include PublicActivity::Model
 
+  # Make user url pretty
+  extend FriendlyId
+  friendly_id :username, use: :slugged
+
+  # Adds voter functionality
+  acts_as_voter
+
+  has_many :phrases
+  has_many :examples
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -21,16 +31,7 @@ class User < ApplicationRecord
 
   # full_name is optional
   validates :full_name, length: { maximum: 30 }, allow_blank: true
-  has_many :phrases
-  has_many :examples
-
-  # Make user url pretty
-  extend FriendlyId
-  friendly_id :username, use: :slugged
-
-  # Adds voter functionality
-  acts_as_voter
-
+  
   # Check if there are any notifications for this instance of user
   def new_notifications?
     PublicActivity::Activity.where(recipient_id: id, read: false).any?

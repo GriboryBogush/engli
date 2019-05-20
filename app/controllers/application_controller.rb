@@ -2,13 +2,12 @@
 
 # Has a lot of common functionality used thoughout application
 class ApplicationController < ActionController::Base
-  # ??
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
 
   # Run #vote_filter for both phrase and example controllers
-  before_action :vote_filter, only: [:vote]
+  before_action :vote_filter, only: :vote
 
   # shared_vote is used to implement voting functionality for
   # Phrase/Example models

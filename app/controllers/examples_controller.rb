@@ -5,7 +5,7 @@ class ExamplesController < ApplicationController
   # Set phrase/example where it's needed
   before_action :init_phrase!, only: %i[create destroy vote]
   before_action :init_example!, only: %i[destroy vote]
-  before_action :authorship_filter, only: [:destroy]
+  before_action :authorship_filter, only: :destroy
 
   def create
     @example = @phrase.examples.new(example_params)
@@ -49,10 +49,9 @@ class ExamplesController < ApplicationController
 
   # should disallow changing other user's phrases
   def authorship_filter
-    return true if @example.user == current_user || @phrase.author?(current_user)
-
-    flash[:danger] = 'You are not author of the phrase or example!'
-    redirect_to root_path
-    false
+    unless helpers.can_delete_example? @example
+      flash[:danger] = 'You are not author of the phrase or example!'
+      redirect_to root_path
+    end
   end
 end

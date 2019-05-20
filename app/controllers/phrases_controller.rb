@@ -8,12 +8,12 @@ class PhrasesController < ApplicationController
 
   def index
     # Paginate phrases
-    @phrases = Phrase.paginate(page: params[:page], per_page: 10)
+    @phrases = Phrase.paginate(page: params[:page])
   end
 
   def show
     # Paginate examples of a phrase
-    @examples = @phrase.examples.paginate(page: params[:page], per_page: 10)
+    @examples = @phrase.examples.paginate(page: params[:page])
     @example = @phrase.examples.build(user_id: current_user.id)
   end
 
@@ -23,36 +23,26 @@ class PhrasesController < ApplicationController
   end
 
   def create
-    params = phrase_params
-
-    # convert category number from string to int due to select element ??
-    params[:category] = params[:category].to_i
-    @phrase = current_user.phrases.new(params)
+    @phrase = current_user.phrases.new(phrase_params)
     if @phrase.save
       flash[:notice] = 'Phrase has been created'
       redirect_to root_path
-      return
+    else
+      flash.now[:danger] = @phrase.errors.full_messages.to_sentence
+      render :new
     end
-
-    flash.now[:danger] = @phrase.errors.full_messages.to_sentence
-    render :new
   end
 
   def edit; end
 
   def update
-    params = phrase_params
-
-    # convert category number from string to int due to select element ??
-    params[:category] = params[:category].to_i
-    if @phrase.update(params)
+    if @phrase.update(phrase_params)
       flash[:notice] = 'Phrase has been updated'
       redirect_to user_path(@phrase.user)
-      return
+    else
+      flash.now[:danger] = @phrase.errors.full_messages.to_sentence
+      render :edit
     end
-
-    flash.now[:danger] = @phrase.errors.full_messages.to_sentence
-    render :edit
   end
 
   def destroy
@@ -73,10 +63,12 @@ class PhrasesController < ApplicationController
   private
 
   def phrase_params
-    params.require(:phrase).permit(
-      :phrase, :translation, :category,
-      examples_attributes: %i[example user_id _destroy]
-    )
+    valid_params = params.require(:phrase).permit(
+          :phrase, :translation, :category,
+          examples_attributes: %i[example user_id _destroy])
+    # convert category number from string to int due to select element ??
+    valid_params[:category] = valid_params[:category].to_i
+    valid_params
   end
 
   def init_phrase
@@ -85,10 +77,9 @@ class PhrasesController < ApplicationController
 
   # should disallow changing other user's phrases
   def authorship_filter
-    return true if @phrase.author? current_user
-
-    flash[:danger] = 'You are not author of the phrase!'
-    redirect_to root_path
-    false
+    unless helpers.can_delete_phrase? @phrase
+      flash[:danger] = 'You are not author of the phrase!'
+      redirect_to root_path
+    end
   end
 end

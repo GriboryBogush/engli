@@ -59,6 +59,6 @@ module ApplicationHelper
                     end
 
     author.update(carma: author.carma)
-    voter.update(carma: voter.carma + vals[:usr]) if vals[:usr] != 0
+    voter.update(carma: voter.carma + vals[:usr]) unless vals[:usr].zero?
   end
 end

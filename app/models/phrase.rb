@@ -6,7 +6,7 @@ class Phrase < ApplicationRecord
   # includes author?, set_carma, redo_carma, unset_carma methods
   include SharedMethods
 
-  # ??? Used for making notifications on controller actions
+  # Used for making notifications on controller actions
   include PublicActivity::Model
 
   CATEGORIES = [['Actions', 0], ['Time', 1], ['Productivity', 2],
