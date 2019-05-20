@@ -12,8 +12,8 @@
   = notification.trackable_type
   | &nbsp;
   - if notification.trackable_type == 'Example'
-    = link_to '#{notification.trackable.example}', phrase_path(notification.trackable.phrase)
+    = link_to notification.trackable.example, phrase_path(notification.trackable.phrase), class: 'simple-link', style: 'color:black;'
   - else
-    = link_to '#{notification.trackable.phrase}', phrase_path(notification.trackable)
+    = link_to notification.trackable.phrase, phrase_path(notification.trackable), class: 'simple-link', style: 'color:black;'
   br
   = date_formatter(notification.created_at)

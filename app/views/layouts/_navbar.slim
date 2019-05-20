@@ -12,9 +12,11 @@ nav.navbar.navbar-default.navbar-expand-lg.navbar-custom
         li.nav-item
           a.nav-link href='#{users_path}' Users
         li.nav-item
-          - if current_user.new_notifications?
-            span.badge.badge-info New!
-          a.nav-link href='#{notifications_path}' Notifications
+          a.nav-link href='#{notifications_path}'
+            | Notifications &nbsp;
+            - if current_user.new_notifications?
+                span.badge.badge-info New!
+
         li.nav-item.dropdown
           a.nav-link.dropdown-toggle href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' = current_user.username
           .dropdown-menu aria-labelledby='navbarDropdown'
