@@ -1,0 +1,71 @@
+@import '_variables.scss';
+
+// --- Generated ---
+%default-color {
+  color: $colDefaultNav;
+}
+
+%highlight-color {
+  color: $colHighlightNav;
+}
+
+%default-bg-color {
+  background-color: $bgDefault;
+}
+
+%highlight-bg-color {
+  background-color: $bgHighlight;
+}
+
+.navbar-custom {
+  @extend %default-bg-color;
+
+  /* change the brand and text color */
+  .navbar-brand {
+    @extend %default-color;
+  }
+
+  .navbar-text {
+    @extend %default-color;
+  }
+
+  /* change the link color */
+  .navbar-nav {
+    .nav-link {
+      @extend %default-color;
+    }
+  }
+
+  /* change the color of active or hovered links */
+  .nav-item {
+    &.active {
+      .nav-link {
+        @extend %highlight-color;
+      }
+    }
+    &:hover {
+      .nav-link {
+        @extend %highlight-color;
+      }
+    }
+  }
+
+  /* for dropdown only - change the color of droodown */
+  .dropdown-menu {
+    @extend %default-bg-color;
+  }
+
+  .dropdown-item {
+    @extend %default-color;
+  }
+
+  .dropdown-item {
+    &:hover {
+      @extend .dropdown-item;
+      @extend %highlight-bg-color;
+    }
+    &:focus {
+      @extend .dropdown-item:hover;
+    }
+  }
+}

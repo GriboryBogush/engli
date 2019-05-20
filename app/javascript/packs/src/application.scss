@@ -1,3 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
-
+@import 'style.scss';
+@import 'new_bootstrap_navar.scss';
+@import 'form.scss';
 // CSS code goes here
+body {
+  background-color: #f8ffd7;
+}

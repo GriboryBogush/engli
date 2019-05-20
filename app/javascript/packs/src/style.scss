@@ -1,0 +1,33 @@
+@import '_variables.scss';
+
+.content-div {
+  background-color: $bgDefault;
+  margin: 30px 10px;
+  padding: 15px 20px;
+  border-radius: 25px;
+}
+
+.custom-table {
+  text-align: center;
+
+  thead {
+    background-color: $bgHighlight;
+  }
+
+  tbody {
+    background-color: #aed581;
+  }
+}
+
+.simple-link {
+  text-decoration: none;
+  color: #f7f7f7;
+
+  &:visited {
+    text-decoration: none;
+  }
+  &:hover {
+    color: $colHighlight;
+    text-decoration: none;
+  }
+}
