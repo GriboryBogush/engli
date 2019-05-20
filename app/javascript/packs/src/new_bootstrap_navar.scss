@@ -1,4 +1,5 @@
 @import '_variables.scss';
+
 // --- Generated ---
 %default-color {
   color: $colDefaultNav;
@@ -23,6 +24,7 @@
   .navbar-brand {
     @extend %default-color;
   }
+
   .navbar-text {
     @extend %default-color;
   }
@@ -33,8 +35,8 @@
       @extend %default-color;
     }
   }
-  /* change the color of active or hovered links */
 
+  /* change the color of active or hovered links */
   .nav-item {
     &.active {
       .nav-link {
@@ -52,9 +54,11 @@
   .dropdown-menu {
     @extend %default-bg-color;
   }
+
   .dropdown-item {
     @extend %default-color;
   }
+
   .dropdown-item {
     &:hover {
       @extend .dropdown-item;
