@@ -14,8 +14,8 @@ table.table.table-bordered.custom-table
   tbody
   - @users.each do |user|
     tr
+      td = user.id
       td = link_to user.username, user_path(user), class: 'simple-link'
-      td = user.username
       td = user.email
       td = date_formatter(user.created_at)
       td = date_formatter(user.updated_at)
