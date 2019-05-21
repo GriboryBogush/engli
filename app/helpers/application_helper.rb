@@ -8,9 +8,9 @@ module ApplicationHelper
 
   def flash_class(level)
     case level
-      when 'notice' then 'alert alert-info'
-      when 'success' then 'alert alert-success'
-      when 'danger' then 'alert alert-danger'
+    when 'notice' then 'alert alert-info'
+    when 'success' then 'alert alert-success'
+    when 'danger' then 'alert alert-danger'
     end
   end
 
@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def notify_of_vote(vote, votable, voter)
-    message = 'up' ? 'liked your' : 'disliked your'
+    message = vote == 'up' ? 'liked your' : 'disliked your'
     votable.create_activity key: message, owner: voter, recipient: votable.user
   end
 

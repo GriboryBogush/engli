@@ -65,8 +65,9 @@ class PhrasesController < ApplicationController
 
   def phrase_params
     valid_params = params.require(:phrase).permit(
-          :phrase, :translation, :category,
-          examples_attributes: %i[example user_id _destroy])
+      :phrase, :translation, :category,
+      examples_attributes: %i[example user_id _destroy]
+    )
     # convert category number from string to int due to select element ??
     valid_params[:category] = valid_params[:category].to_i
     valid_params

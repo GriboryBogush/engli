@@ -3,7 +3,7 @@ RSpec.shared_examples 'has show action' do |shown_object|
   let(:obj) { shown_object != :user ? create(shown_object, user: user) : user }
   before do
     sign_in user
-    
+
     get :show, params: { id: obj.id }
   end
   it { expect(subject).to respond_with(:ok) }
