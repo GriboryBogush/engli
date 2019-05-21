@@ -6,6 +6,14 @@ module ApplicationHelper
     date.strftime('%A %d %b %Y')
   end
 
+  def flash_class(level)
+    case level
+    when 'notice' then 'alert alert-info'
+    when 'success' then 'alert alert-success'
+    when 'danger' then 'alert alert-danger'
+    end
+  end
+
   def check_votes_for_email(phrase)
     if (phrase.weighted_score / 5).positive? &&
        (phrase.weighted_score % 5).zero?
@@ -15,7 +23,7 @@ module ApplicationHelper
   end
 
   def notify_of_vote(vote, votable, voter)
-    message = 'up' ? 'liked your' : 'disliked your'
+    message = vote == 'up' ? 'liked your' : 'disliked your'
     votable.create_activity key: message, owner: voter, recipient: votable.user
   end
 

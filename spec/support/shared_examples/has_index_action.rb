@@ -3,7 +3,7 @@ RSpec.shared_examples 'has index action' do
   before do
     sign_in user
     get :index
-  end 
+  end
   it { expect(subject).to respond_with(:ok) }
   it { expect(subject).to render_template(:index) }
 end

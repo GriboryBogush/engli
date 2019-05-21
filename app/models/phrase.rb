@@ -7,13 +7,13 @@ class Phrase < ApplicationRecord
   include SharedMethods
 
   # Used for making notifications on controller actions
-  include PublicActivity::Model
+  include PublicActivity::Common
 
   CATEGORIES = [['Actions', 0], ['Time', 1], ['Productivity', 2],
                 ['Apologies', 3], ['Common', 4]].freeze
 
   belongs_to :user
-  has_many :examples
+  has_many :examples, dependent: :destroy
   accepts_nested_attributes_for :examples, allow_destroy: true
   validates :phrase, :translation, presence: true
   validates :phrase, uniqueness: true
@@ -30,4 +30,9 @@ class Phrase < ApplicationRecord
 
   # Add voting functionality
   acts_as_votable
+
+  # Make sure to change slug on phrase update
+  def should_generate_new_friendly_id?
+    slug.blank? || phrase_changed?
+  end
 end

@@ -3,7 +3,7 @@
 # User model is used with Devise to add authentication
 # has voter functionality and friendly id
 class User < ApplicationRecord
-  include PublicActivity::Model
+  include PublicActivity::Common
 
   # Make user url pretty
   extend FriendlyId
@@ -12,8 +12,8 @@ class User < ApplicationRecord
   # Adds voter functionality
   acts_as_voter
 
-  has_many :phrases
-  has_many :examples
+  has_many :phrases, dependent: :destroy
+  has_many :examples, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -31,9 +31,14 @@ class User < ApplicationRecord
 
   # full_name is optional
   validates :full_name, length: { maximum: 30 }, allow_blank: true
-  
+
   # Check if there are any notifications for this instance of user
   def new_notifications?
     PublicActivity::Activity.where(recipient_id: id, read: false).any?
+  end
+
+  # Make sure to change slug on username update
+  def should_generate_new_friendly_id?
+    slug.blank? || username_changed?
   end
 end

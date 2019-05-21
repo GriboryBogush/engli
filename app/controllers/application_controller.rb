@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   def vote_filter
     invalid = if params[:controller] == 'examples'
                 phrase = Phrase.friendly.find(params[:phrase_id])
-                phrase.examples.find(params[:id]).author? current_user
+                phrase.examples.find(params[:example_id]).author? current_user
               else
                 Phrase.friendly.find(params[:id]).author? current_user
               end
