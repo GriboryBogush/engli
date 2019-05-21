@@ -8,6 +8,9 @@ table.table.custom-table
       th Id
       th Username
       th Email
+      th Full Name
+      th Age
+      th Pro?
       th Created At
       th Updated At
   tbody
@@ -15,6 +18,9 @@ table.table.custom-table
       td = @user.id
       td = @user.username
       td = @user.email
+      td = @user.full_name ? @user.full_name : 'None'
+      td = @user.age
+      td = @user.pro ? 'Yes' : 'No'
       td = date_formatter(@user.created_at)
       td = date_formatter(@user.updated_at)
 br

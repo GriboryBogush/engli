@@ -12,8 +12,9 @@ html
   - if user_signed_in?
     = render 'layouts/navbar'
   .container-fluid
-    .row.justify-content-md-center
-      .col-lg-6.col-lg-offset-3
+    .row.justify-content-lg-center
+      .col-lg-8.col-lg-offset-3
         - flash.each do |key, value|
-          .alert class='alert-#{key}' = value
+          div class='#{flash_class(key)}'
+            = value
         .content-div = yield
