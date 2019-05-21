@@ -4,7 +4,8 @@
 class ExamplesController < ApplicationController
   # Set phrase/example where it's needed
   before_action :init_phrase!, only: %i[create destroy vote]
-  before_action :init_example!, only: %i[destroy vote]
+  before_action :init_example!, only: :vote
+  before_action :different_init!, only: :destroy
   before_action :authorship_filter, only: :destroy
 
   def create
@@ -17,6 +18,7 @@ class ExamplesController < ApplicationController
     redirect_to phrase_path(@phrase)
   end
 
+  # SUGGESTION: make sure PublicActivity record gets deleted too?
   def destroy
     if @example.destroy
       flash[:notice] = 'Example has been deleted!'
@@ -43,8 +45,16 @@ class ExamplesController < ApplicationController
     @phrase = Phrase.friendly.find(params[:phrase_id])
   end
 
-  def init_example!
+  # It seems that on destroy and on vote hashes are different thus two init
+  # methods for @example. Probably not the best solution.
+  # On destroy
+  def different_init!
     @example = @phrase.examples.find(params[:id])
+  end
+
+  # On vote
+  def init_example!
+    @example = @phrase.examples.find(params[:example_id])
   end
 
   # should disallow changing other user's phrases
