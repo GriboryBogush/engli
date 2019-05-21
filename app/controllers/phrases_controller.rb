@@ -45,8 +45,9 @@ class PhrasesController < ApplicationController
     end
   end
 
+  # SUGGESTION: make sure PublicActivity record gets deleted too?
   def destroy
-    if @phrase.delete
+    if @phrase.destroy
       flash[:notice] = 'Phrase has been deleted'
       redirect_to user_path(@phrase.user)
     else

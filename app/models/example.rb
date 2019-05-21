@@ -6,8 +6,8 @@ class Example < ApplicationRecord
   # includes author?, set_carma, redo_carma, unset_carma methods
   include SharedMethods
 
-  # ??? Used for making notifications on controller actions
-  include PublicActivity::Model
+  # Used for making notifications on :vote
+  include PublicActivity::Common
 
   belongs_to :user
   belongs_to :phrase

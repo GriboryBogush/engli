@@ -5,15 +5,24 @@
   - else
     span.badge.badge-secondary Read
   br
-  = notification.owner.username
+  - unless notification.owner.nil?
+    = link_to notification.owner.username, user_path(notification.owner), class: 'simple-link', style: 'color:black;'
+  - else
+    | '[deleted user]'
   | &nbsp;
   = notification.key
   | &nbsp;
   = notification.trackable_type
   | &nbsp;
   - if notification.trackable_type == 'Example'
-    = link_to notification.trackable.example, phrase_path(notification.trackable.phrase), class: 'simple-link', style: 'color:black;'
+    - unless notification.trackable.nil?
+      = link_to notification.trackable.example, phrase_path(notification.trackable.phrase), class: 'simple-link', style: 'color:black;'
+    - else
+      | [deleted example]
   - else
-    = link_to notification.trackable.phrase, phrase_path(notification.trackable), class: 'simple-link', style: 'color:black;'
+    - unless notification.trackable.nil?
+      = link_to notification.trackable.phrase, phrase_path(notification.trackable), class: 'simple-link', style: 'color:black;'
+    - else
+      | [deleted phrase]
   br
   = date_formatter(notification.created_at)
